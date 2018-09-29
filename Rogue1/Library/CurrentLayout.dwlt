@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 9}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 521}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_MinSize: {x: 436, y: 271}
   m_MaxSize: {x: 14006, y: 10021}
   vertical: 0
-  controlID: 121
+  controlID: 98
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -90,10 +90,10 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 713, y: 492}
+  m_MinSize: {x: 713, y: 471}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 1
-  controlID: 9
+  controlID: 10
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,8 +137,8 @@ MonoBehaviour:
     y: 0
     width: 364
     height: 357
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -164,10 +164,10 @@ MonoBehaviour:
     y: 0
     width: 1366
     height: 635
-  m_MinSize: {x: 713, y: 492}
+  m_MinSize: {x: 713, y: 471}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 10
+  controlID: 11
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -278,10 +278,10 @@ MonoBehaviour:
     y: 0
     width: 972
     height: 635
-  m_MinSize: {x: 436, y: 492}
+  m_MinSize: {x: 436, y: 471}
   m_MaxSize: {x: 14006, y: 14042}
   vertical: 1
-  controlID: 120
+  controlID: 12
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -302,10 +302,10 @@ MonoBehaviour:
     y: 0
     width: 972
     height: 357
-  m_MinSize: {x: 306, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 302, y: 200}
+  m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 26
+  controlID: 13
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -514,14 +514,14 @@ MonoBehaviour:
     height: 336
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 26187.292107284477
+  lastFramingTime: 948.9276194368399
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -3.8647277, y: -6.759947, z: 0.20454505}
+    m_Target: {x: 19.526213, y: 15.299194, z: -0.0390625}
     speed: 2
-    m_Value: {x: -3.8647277, y: -6.759947, z: 0.20454505}
+    m_Value: {x: 19.526213, y: 15.299194, z: -0.0390625}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -553,15 +553,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 12.42954
+    m_Target: 35.48707
     speed: 2
-    m_Value: 12.42954
+    m_Value: 35.48707
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
   m_ShowGlobalGrid: 1
-  m_LastSceneViewRotation: {x: 0.08617093, y: -0.88925666, z: 0.20803502, w: 0.39814448}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -609,14 +609,14 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Eduardo\AppData\Local\Temp\5cde4fd0d247ac243834b5343282cce7
+  m_LastProjectPath: C:\Users\Henrique\Documents\Projects\jack-flag\Rogue1
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b6280000
     m_LastClickedID: 10422
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 000000006c090000220c00004e0d0000aa0d0000f60d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -641,21 +641,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 169}
+    scrollPos: {x: 0, y: 240}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: b453faffffffffff0000000024320000483500002c380000383a0000
+    m_ExpandedIDs: ffffffff000000006c09000084090000d40900004e0d0000aa0d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: TaticsMove
-      m_OriginalName: TaticsMove
+      m_Name: caminho
+      m_OriginalName: caminho
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 15264
+      m_UserData: 2516
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -726,23 +726,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f251f9ff
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 1482f8ffe298f8ff567af9ffca2efaffea8ffaff10c4fbffa6e1ffffeee5ffff00000000
+    m_ExpandedIDs: 785afeffda61feffe461feffee61fefff861feff0262feff0c62feff1a63feff2463feff2e63feff3863feff4263feff4c63feff5a64feff6464feff6e64feff7864feff8264feff8c64feff9a65feffa465feffae65feffb865feffc265feffcc65feff3877feff6e77feff52dbfeff92dcfeff9cdcfeffd2ddfeffc8e1feff3ed5ffff48d5ffff52d5ffff5cd5ffff66d5ffff70d5ffff7ad5ffff84d5ffff92d6ffff9cd6ffffa6d6ffffb0d6ffffbad6ffffc4d6ffffced6ffffd8d6ffffe6d7fffff0d7fffffad7ffff04d8ffff0ed8ffff18d8ffff22d8ffff2cd8ffff3ad9ffff44d9ffff4ed9ffff58d9ffff62d9ffff6cd9ffff76d9ffff80d9ffff8edaffff98daffffa2daffffacdaffffb6daffffc0daffffcadaffffd4daffffe2dbffffecdbfffff6dbffff00dcffff0adcffff14dcffff1edcffff28dcffff36ddffff40ddffff4addffff54ddffff5eddffff68ddffff72ddffff7cddffff8adeffff94deffff9edeffffa8deffffb2deffffbcdeffffc6deffffd0deffff8cf9ffffe6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Camera
-      m_OriginalName: Camera
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -429542
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 6}
     m_SearchString: 

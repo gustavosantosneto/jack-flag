@@ -52,14 +52,14 @@ public class BoardManager : MonoBehaviour {
     {
         boardHolder = new GameObject("Board").transform;
 
-        for (int x = -1; x < columns + 1; x++)
+        for (int x = 0; x < columns; x++)
         {
-            for (int y = -1; y < rows + 1; y++)
+            for (int y = 0; y < rows; y++)
             {
                 
                 GameObject toInstantiate = grassTiles[0];
-                int aux = 5;
-                if((x + y < aux) || ((rows - x) + (rows - y) < aux)) {
+                int aux = 7;
+                if((x + y < aux) || ((rows - x - 1) + (rows - y - 1) < aux)) {
                     toInstantiate = concretoTiles[0];
                 }
 
