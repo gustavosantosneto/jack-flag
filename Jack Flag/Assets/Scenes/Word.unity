@@ -219,7 +219,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columns: 32
   rows: 32
-  floorTile: {fileID: 1310684580220596, guid: 4801787ce8fe9734ea08da3db34cdf0f, type: 2}
+  concretoTiles:
+  - {fileID: 1181823509571230, guid: 7949004e3a573674a9b8dc25220665c0, type: 2}
+  aguaTiles:
+  - {fileID: 1868737134042300, guid: d0075ae938eb89342a9974bab976152e, type: 2}
+  grassTiles:
+  - {fileID: 1921858791092618, guid: acfe3fa148e57414a9b7f27165d82d93, type: 2}
   players:
   - {fileID: 114573569067698196, guid: 03aeaf2dcc57c0a4db8ed5ef42b171db, type: 2}
 --- !u!4 &1442575239
