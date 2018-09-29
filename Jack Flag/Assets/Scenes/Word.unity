@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -225,6 +225,10 @@ MonoBehaviour:
   - {fileID: 1868737134042300, guid: d0075ae938eb89342a9974bab976152e, type: 2}
   grassTiles:
   - {fileID: 1921858791092618, guid: acfe3fa148e57414a9b7f27165d82d93, type: 2}
+  flag_black:
+  - {fileID: 1441963116301178, guid: d2c2cb7007487c84bbfac648e27be605, type: 2}
+  flag_white:
+  - {fileID: 1619844019748590, guid: 4093b301363069b4aa5abf8df52d081a, type: 2}
   players:
   - {fileID: 114573569067698196, guid: 03aeaf2dcc57c0a4db8ed5ef42b171db, type: 2}
 --- !u!4 &1442575239
