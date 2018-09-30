@@ -63,6 +63,8 @@ public class CenarioCreator : MonoBehaviour
             {
                 newPlayerinstanc.energy_text = EnergyText;
                 player1 = newPlayerinstanc;
+                CameraController cam = Camera.main.GetComponent<CameraController>();
+                cam.target = player1.transform;
             }
         }
     }
@@ -223,7 +225,7 @@ public class CenarioCreator : MonoBehaviour
             }
             else if (clickedGameObject.tag == "Player")
             {
-                player1 = playerTypes.First(w => w.GetComponent<GameObject>() == clickedGameObject);
+                //player1 = playerTypes.First(w => w.GetComponent<GameObject>() == clickedGameObject);
 
                 DrawSiblings(player1.position);
                 SetTurn(turn + 1);
