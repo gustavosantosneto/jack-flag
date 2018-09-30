@@ -237,6 +237,10 @@ MonoBehaviour:
   - {fileID: 1441963116301178, guid: d2c2cb7007487c84bbfac648e27be605, type: 2}
   flag_white:
   - {fileID: 1619844019748590, guid: 4093b301363069b4aa5abf8df52d081a, type: 2}
+  rochaTiles:
+  - {fileID: 1153050551212968, guid: 8cdd6ba4561f06047b0af72bbccc6797, type: 2}
+  maca:
+  - {fileID: 1166334787942368, guid: b1d5499c0924e224fa0a60bfafcc9f05, type: 2}
   players:
   - {fileID: 114573569067698196, guid: 03aeaf2dcc57c0a4db8ed5ef42b171db, type: 2}
 --- !u!4 &1442575239
