@@ -28,6 +28,7 @@ public class CenarioCreator : MonoBehaviour
     public GameObject[] team1Base;
     public GameObject[] team2Base;
     public GameObject[] maca;
+    public RuntimeAnimatorController[] Pusher_anim;
 
     public Char[] playerTypes;
     public Text EnergyText;
@@ -315,6 +316,8 @@ public class CenarioCreator : MonoBehaviour
 
         if (moved)
         {
+            var animator = player1.GetComponent<Animator>();
+            animator.runtimeAnimatorController = Pusher_anim[2];
             //Flag follow char, if clicked
             if (flagBlackClicked)
             {

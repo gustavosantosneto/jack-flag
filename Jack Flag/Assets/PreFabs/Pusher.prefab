@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 54920286861513730}
   - component: {fileID: 65833550132399988}
   - component: {fileID: 114639981818446204}
-  - component: {fileID: 95689835123417182}
+  - component: {fileID: 111400702698711812}
+  - component: {fileID: 95063080421615694}
   m_Layer: 8
-  m_Name: Jumper
+  m_Name: Pusher
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,16 +70,16 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.76, y: 0.47, z: 0.2}
+  m_Size: {x: 1.28, y: 1.28, z: 0.21}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95689835123417182
+--- !u!95 &95063080421615694
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1426998440100658}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 18a2129e8e7237e43a455ac5e4366a42, type: 2}
   m_CullingMode: 0
@@ -89,6 +90,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!111 &111400702698711812
+Animation:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1426998440100658}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 232c5d5791534b94a824f90954ceca6d, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114639981818446204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,7 +121,7 @@ MonoBehaviour:
   orientation: 0
   startX: 1
   startY: 1
-  type: Pusher
+  type: Jumper
   width: 1
   weigth: 1
   z: -0.21
