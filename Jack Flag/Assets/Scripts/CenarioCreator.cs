@@ -22,6 +22,8 @@ public class CenarioCreator : MonoBehaviour
     public GameObject[] flag_black;
     public GameObject[] flag_white;
     public GameObject[] rochaTiles;
+    public GameObject[] team1Base;
+    public GameObject[] team2Base;
     public GameObject[] maca;
 
     public Char[] players;
@@ -137,7 +139,11 @@ public class CenarioCreator : MonoBehaviour
             
         }
 
+        instance = Instantiate(team1Base[0], new Vector3(2, 2, 0f), Quaternion.identity) as GameObject;
+        instance.transform.SetParent(_boardHolder);
         instance = Instantiate(flag_black[0], new Vector3(2, 2, 0f), Quaternion.identity) as GameObject;
+        instance.transform.SetParent(_boardHolder);
+        instance = Instantiate(team2Base[0], new Vector3(29, 29, 0f), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
         instance = Instantiate(flag_white[0], new Vector3(29, 29, 0f), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
