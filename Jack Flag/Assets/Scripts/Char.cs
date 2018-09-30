@@ -96,12 +96,12 @@ public class Char : MonoBehaviour
         // [X] [O] [X] [O] [X]
         // [X] [O] [O] [O] [X]
         // [X] [X] [X] [X] [X]
-        return
-            destinePosition != position &&
-            destinePosition.x <= position.x + factor &&
-            destinePosition.x >= position.x - factor &&
-            destinePosition.y <= position.y + factor &&
-            destinePosition.y >= position.y - factor;
+        return //true;
+        destinePosition != position &&
+        destinePosition.x <= position.x + factor &&
+        destinePosition.x >= position.x - factor &&
+        destinePosition.y <= position.y + factor &&
+        destinePosition.y >= position.y - factor;
     }
 
     internal object GetMaximumMoviment()

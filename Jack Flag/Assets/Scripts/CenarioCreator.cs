@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,9 @@ public class CenarioCreator : MonoBehaviour
     public int rows = 32;
     public static int tileScale = 1;
     public int turn = 1;
+    public bool isFinish = false;
+    float finishTimer = 1;
+    int finishOption = 1;
 
     public GameObject[] concretoTiles;
     public GameObject[] aguaTiles;
@@ -34,37 +38,68 @@ public class CenarioCreator : MonoBehaviour
     public Text TurnText;
 
     private Char player1;
-    private Vector3 player1LastMove;
+    private Vector3 player1LastMove = new Vector3();
+
+    private Char player2;
+    private Vector3 player2LastMove = new Vector3();
+
+
     private GameObject flagBlack;
     private bool flagBlackClicked = false;
+    private Text flagAText;
+
     private GameObject flagWhite;
     private bool flagWhiteClicked = false;
+    private Text flagBText;
 
     void Awake()
+    {
+        Init();
+    }
+
+
+    void Init()
     {
         MakeFloor();
         EnergyText = GameObject.Find("EnergyText").GetComponent<Text>();
         TurnText = GameObject.Find("TurnText").GetComponent<Text>();
+        flagAText = GameObject.Find("TeamAFlagText").GetComponent<Text>();
+        flagBText = GameObject.Find("TeamBFlagText").GetComponent<Text>();
         CreatePlayers();
     }
 
-    public void SetTurn(int turnValue = 100)
+    public void Turn()
     {
-        turn = turnValue;
+        turn = turn + 1;
         TurnText.text = turn.ToString();
     }
 
     void CreatePlayers()
     {
-        for (int i = 0, len = playerTypes.Length; i < len; i++)
-        {
-            var newPlayerinstanc = Instantiate(playerTypes[i], new Vector3((float)playerTypes[i].startX, (float)playerTypes[i].startY + 0.2f, playerTypes[i].z), Quaternion.identity);
-            if (player1 == null)
-            {
-                newPlayerinstanc.energy_text = EnergyText;
-                player1 = newPlayerinstanc;
-            }
-        }
+        //for (int i = 0, len = 2; i < len; i++)
+        //{
+        var newPlayerinstanc = Instantiate(playerTypes[0], new Vector3((float)playerTypes[0].startX, (float)playerTypes[0].startY + 0.2f, playerTypes[0].z), Quaternion.identity);
+
+        newPlayerinstanc.energy_text = EnergyText;
+        player1 = newPlayerinstanc;
+        player1.SetEnergy(player1.energy);
+        player1.GetComponent<SpriteRenderer>().color = Color.blue;
+
+        DrawSiblings(player1.position);
+        //continue;
+
+
+        newPlayerinstanc = Instantiate(playerTypes[0], new Vector3(30, 30 + 0.2f, playerTypes[0].z), Quaternion.identity);
+
+        newPlayerinstanc.energy_text = EnergyText;
+        player2 = newPlayerinstanc;
+        player2.SetEnergy(player2.energy);
+        player1.GetComponent<SpriteRenderer>().color = Color.red;
+
+        //DrawSiblings(player2.position);
+        //continue;
+
+        //}
     }
 
     void MakeFloor()
@@ -102,7 +137,6 @@ public class CenarioCreator : MonoBehaviour
                     toInstantiate = concretoTiles[0];
 
                     instance = Instantiate(toInstantiate, new Vector3Int(x, y, 0), Quaternion.identity) as GameObject;
-                    instance.transform.SetParent(_boardHolder);
                     instance.transform.SetParent(_boardHolder);
                 }
                 else if (InsideCircle(centroAgua1, raioAgua1, pos) || (InsideCircle(centroAgua2, raioAgua2, pos)))
@@ -179,8 +213,8 @@ public class CenarioCreator : MonoBehaviour
         instance = Instantiate(team2Base[0], new Vector3Int(29, 29, 0), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
 
-        instance = Instantiate(flag_white[0], new Vector3Int(29, 29, 0), Quaternion.identity) as GameObject;
-        instance.transform.SetParent(_boardHolder);
+        flagWhite = Instantiate(flag_white[0], new Vector3Int(29, 29, 0), Quaternion.identity) as GameObject;
+        flagWhite.transform.SetParent(_boardHolder);
     }
 
     bool InsideCircle(int[] center, int radius, int[] position)
@@ -193,13 +227,23 @@ public class CenarioCreator : MonoBehaviour
     void Update()
     {
         ClickOperations();
+
+        if (isFinish)
+        {
+            finishTimer -= Time.deltaTime;
+
+            if (finishTimer < 0)
+            {
+                Finish();
+            }
+        }
     }
 
     void ClickOperations()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Camera.allCameras[0] == null)
+            if (Camera.main == null)
                 return;
 
             var clickedGameObject = GetClickedGameObject();
@@ -207,30 +251,56 @@ public class CenarioCreator : MonoBehaviour
             if (clickedGameObject == null)
                 return;
 
-            //Flag click
+            //Flag black click
             if (clickedGameObject.transform.position.x == 2 && clickedGameObject.transform.position.y == 2)
             {
+                //Esta com a bandeira branca, e é o time azul
+                if (flagWhiteClicked && (turn % 2 == 1))
+                {
+                    isFinish = true;
+                    GameObject.Find("Finish").GetComponent<Text>().text = "Fim\nAzul\nvenceu";
+                    return;
+                }
+
                 flagBlackClicked = true;
+                flagAText.text = "Sim";
+                Turn();
             }
+            //flag white click
             else if (clickedGameObject.transform.position.x == 29 && clickedGameObject.transform.position.y == 29)
             {
+                //Esta com a bandeira preta, e é o time vermelho
+                if (flagBlackClicked && (turn % 2 == 0))
+                {
+                    isFinish = true;
+                    GameObject.Find("Finish").GetComponent<Text>().text = "Fim\nVermelho\nvenceu";
+                    return;
+                }
+
                 flagWhiteClicked = true;
+                flagBText.text = "Sim";
+                Turn();
             }
             else if (clickedGameObject.tag == "Floor")
             {
-                _GotoClickedTile(clickedGameObject);
-                SetTurn(turn + 1);
+                GotoClickedTile(clickedGameObject);
+                Turn();
             }
             else if (clickedGameObject.tag == "Player")
             {
-                player1 = playerTypes.First(w => w.GetComponent<GameObject>() == clickedGameObject);
+                if (player1 == clickedGameObject)
+                    DrawSiblings(player1.position);
 
-                DrawSiblings(player1.position);
-                SetTurn(turn + 1);
+                if (player2 == clickedGameObject)
+                    DrawSiblings(player2.position);
             }
             else if (clickedGameObject.tag == "Obstacle")
             {
-                SetTurn(turn + 1);
+            }
+            else if (clickedGameObject.tag == "Item")
+            {
+                GotoClickedTile(clickedGameObject);
+                Turn();
             }
         }
     }
@@ -266,7 +336,7 @@ public class CenarioCreator : MonoBehaviour
         spriteR.color = color;
     }
 
-    private bool checkOuterLimits(Vector3Int refPosition)
+    private bool CheckOuterLimits(Vector3Int refPosition)
     {
         return refPosition.x >= 0 && refPosition.y >= 0 && refPosition.x <= rows && refPosition.y <= columns;
     }
@@ -288,7 +358,7 @@ public class CenarioCreator : MonoBehaviour
         siblings.Add(new Vector3Int(refPosition.x, refPosition.y + factor, 0));
         siblings.Add(new Vector3Int(refPosition.x, refPosition.y - factor, 0));
 
-        return siblings.Where(w => checkOuterLimits(w)).ToList();
+        return siblings.Where(w => CheckOuterLimits(w)).ToList();
     }
 
     GameObject GetClickedGameObject()
@@ -303,25 +373,108 @@ public class CenarioCreator : MonoBehaviour
         return null;
     }
 
-    void _GotoClickedTile(GameObject tile)
+    void GotoClickedTile(GameObject tile)
     {
-        var destinePosition = new Vector3(tile.transform.position.x, tile.transform.position.y, player1.z);
-
-        player1LastMove = player1.position;
-
-        var moved = player1.MoveTo(destinePosition);
-
-        if (moved)
+        //red turn
+        if (turn % 2 == 0)
         {
-            //Flag follow char, if clicked
-            if (flagBlackClicked)
+            var destinePosition = new Vector3(tile.transform.position.x, tile.transform.position.y, player2.z);
+
+            player2LastMove = player2.position;
+
+            var moved = player2.MoveTo(destinePosition);
+
+            if (moved)
             {
-                flagBlack.GetComponent<Rigidbody>().MovePosition(player1LastMove);
+                //Flag follow char, if clicked
+                if (flagBlackClicked)
+                {
+                    flagBlack.GetComponent<Rigidbody>().MovePosition(player2LastMove);
+                }
+
+                DrawSiblings(player1.position);
             }
+        }
+        //blue turn
+        else
+        {
+            var destinePosition = new Vector3(tile.transform.position.x, tile.transform.position.y, player1.z);
 
-            var floorPos = Vector3Int.RoundToInt(tile.transform.position);
+            player1LastMove = player1.position;
 
-            DrawSiblings(floorPos);
+            var moved = player1.MoveTo(destinePosition);
+
+            if (moved)
+            {
+                //Flag follow char, if clicked
+                if (flagWhiteClicked)
+                {
+                    flagWhite.GetComponent<Rigidbody>().MovePosition(player1LastMove);
+                }
+
+                DrawSiblings(player2.position);
+            }
+        }
+    }
+
+    private void Finish()
+    {
+        if (finishOption == 1)
+        {
+            finishOption++;
+            finishTimer = 1;
+
+            GameObject.Find("Finish").GetComponent<Text>().text = "";
+
+            return;
+        }
+        else if (finishOption == 2)
+        {
+
+            //finishOption++;
+            //finishTimer = 1;
+
+            EnergyText.text = "100";
+            TurnText.text = "0";
+            flagAText.text = "Não";
+            flagBText.text = "Não";
+            turn = 1;
+
+            //}
+            //else if (finishOption == 3)
+            //{
+            //finishOption++;
+            //finishTimer = 1;
+
+            Destroy(_boardHolder.gameObject);
+            Destroy(player1.gameObject);
+            Destroy(player2.gameObject);
+
+            player1LastMove = new Vector3();
+            player2LastMove = new Vector3();
+            //}
+            //else if (finishOption == 4)
+            //{
+            //   finishOption++;
+            //   finishTimer = 1;
+
+            MakeFloor();
+
+            // }
+            // else if (finishOption == 5)
+            // {
+
+            flagBlack = null;
+            flagBlackClicked = false;
+
+            flagWhite = null;
+            flagWhiteClicked = false;
+
+            CreatePlayers();
+
+            isFinish = false;
+            finishTimer = 1;
+            finishOption = 1;
         }
     }
 }

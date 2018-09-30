@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65097312509658756}
   m_Layer: 5
   m_Name: Flag_White
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
