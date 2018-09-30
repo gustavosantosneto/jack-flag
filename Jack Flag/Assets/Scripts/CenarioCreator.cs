@@ -32,6 +32,7 @@ public class CenarioCreator : MonoBehaviour
     public GameObject[] team1Base;
     public GameObject[] team2Base;
     public GameObject[] maca;
+    public RuntimeAnimatorController[] Pusher_anim;
 
     public Char[] playerTypes;
     public Text EnergyText;
@@ -373,12 +374,12 @@ public class CenarioCreator : MonoBehaviour
         //blue turn
         //if (turn % 2 == 1)
         //{
-            Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                return hit.transform.gameObject;
-            }
+        Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.transform.gameObject;
+        }
         //}
         //else
         //{
@@ -403,6 +404,9 @@ public class CenarioCreator : MonoBehaviour
 
             var moved = player2.MoveTo(destinePosition);
 
+            var animator = player2.GetComponent<Animator>();
+            animator.runtimeAnimatorController = Pusher_anim[4];
+
             if (moved)
             {
                 //Flag follow char, if clicked
@@ -415,8 +419,6 @@ public class CenarioCreator : MonoBehaviour
 
                 cam.target = player1.transform;
 
-                //cam.GetComponent<Camera>().enabled = false;
-                //cam2.GetComponent<Camera>().enabled = true;
             }
         }
         //blue turn
@@ -427,6 +429,9 @@ public class CenarioCreator : MonoBehaviour
             player1LastMove = player1.position;
 
             var moved = player1.MoveTo(destinePosition);
+
+            var animator = player1.GetComponent<Animator>();
+            animator.runtimeAnimatorController = Pusher_anim[4];
 
             if (moved)
             {
@@ -439,8 +444,6 @@ public class CenarioCreator : MonoBehaviour
                 DrawSiblings(player2.position);
 
                 cam.target = player2.transform;
-                //cam2.GetComponent<Camera>().enabled = false;
-                //cam.GetComponent<Camera>().enabled = true;
             }
         }
     }

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 54920286861513730}
   - component: {fileID: 65833550132399988}
   - component: {fileID: 114639981818446204}
+  - component: {fileID: 95689835123417182}
   m_Layer: 8
   m_Name: Jumper
   m_TagString: Player
@@ -68,8 +69,26 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.28, y: 1.28, z: 0.21}
+  m_Size: {x: 0.76, y: 0.47, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95689835123417182
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1426998440100658}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 18a2129e8e7237e43a455ac5e4366a42, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114639981818446204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,9 +106,10 @@ MonoBehaviour:
   orientation: 0
   startX: 1
   startY: 1
-  type: Jumper
+  type: Pusher
   width: 1
   weigth: 1
+  z: -0.21
 --- !u!212 &212407711240092756
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -105,7 +125,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 106cd00604f4a3f4c9f80d543186b1ff, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,12 +145,12 @@ SpriteRenderer:
   m_SortingLayerID: 67424873
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300072, guid: 259050aed603d124ba2593b0e70f4af4, type: 3}
-  m_Color: {r: 0.9433962, g: 0.022249907, b: 0.022249907, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a3c2585adc525a945adcb17b0bb7f11f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.02, y: 1.03}
+  m_Size: {x: 0.76, y: 0.47}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -6,9 +6,16 @@ using UnityEngine.UI;
 
 public class Char : MonoBehaviour
 {
+
+    public Vector3 destination;
+    public double angleDirection;
+    public Vector3 charFront;
+
     void Start()
     {
         _RigidBody = GetComponent<Rigidbody>();
+        destination = transform.position;
+        charFront = new Vector3(0f, 1f, 0f);
     }
 
     public int energy;
@@ -60,7 +67,13 @@ public class Char : MonoBehaviour
     {
         if (ValidateDestine(destinePosition) && energy > 0)
         {
-            _RigidBody.MovePosition(destinePosition);
+           // destination eh necessario para o personagem caminhar
+            destination = destinePosition;
+            Vector3 vecDirection = destination - transform.position;
+            float angle = Vector3.SignedAngle(charFront, vecDirection, new Vector3(0f,0f,1f));
+            transform.Rotate(0, 0, angle);
+            charFront = vecDirection;
+
             SetEnergy(energy - 1);
             return true;
         }
@@ -96,12 +109,12 @@ public class Char : MonoBehaviour
         // [X] [O] [X] [O] [X]
         // [X] [O] [O] [O] [X]
         // [X] [X] [X] [X] [X]
-        return //true;
-        destinePosition != position &&
-        destinePosition.x <= position.x + factor &&
-        destinePosition.x >= position.x - factor &&
-        destinePosition.y <= position.y + factor &&
-        destinePosition.y >= position.y - factor;
+        return true;
+        //destinePosition != position &&
+        //destinePosition.x <= position.x + factor &&
+        //destinePosition.x >= position.x - factor &&
+        //destinePosition.y <= position.y + factor &&
+        //destinePosition.y >= position.y - factor;
     }
 
     internal object GetMaximumMoviment()
@@ -124,5 +137,10 @@ public class Char : MonoBehaviour
         }
 
         return n;
+    }
+
+    void Update()
+    {
+        transform.position = Vector3.Lerp(transform.position, destination, /*0.85f **/ Time.deltaTime);
     }
 }

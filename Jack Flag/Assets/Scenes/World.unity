@@ -820,6 +820,12 @@ MonoBehaviour:
   - {fileID: 1658878342657250, guid: 2d55a8004e1a665428538043f1723fa3, type: 2}
   maca:
   - {fileID: 1166334787942368, guid: b1d5499c0924e224fa0a60bfafcc9f05, type: 2}
+  Pusher_anim:
+  - {fileID: 9100000, guid: 18a2129e8e7237e43a455ac5e4366a42, type: 2}
+  - {fileID: 9100000, guid: 9c0fd94788189a547b0556c07178476d, type: 2}
+  - {fileID: 9100000, guid: b19293e7a96cf4846b34c6862afaae12, type: 2}
+  - {fileID: 9100000, guid: d6b57a767174ce74a8de81eb39bd9bde, type: 2}
+  - {fileID: 9100000, guid: 50f01906a7717194d962a5d796c654cc, type: 2}
   playerTypes:
   - {fileID: 114639981818446204, guid: 03a6f95f65d64904db9a545c99b55d17, type: 2}
   EnergyText: {fileID: 0}
