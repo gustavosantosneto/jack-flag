@@ -45,3 +45,6 @@ TagManager:
   - name: Itens
     uniqueID: 1693675043
     locked: 0
+  - name: New Layer
+    uniqueID: 3490080793
+    locked: 0
