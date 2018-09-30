@@ -43,6 +43,8 @@ public class CenarioCreator : MonoBehaviour
     private Char player2;
     private Vector3 player2LastMove = new Vector3();
 
+    public CameraController cam;
+    //public CameraController cam2;
 
     private GameObject flagBlack;
     private bool flagBlackClicked = false;
@@ -85,16 +87,21 @@ public class CenarioCreator : MonoBehaviour
         player1.SetEnergy(player1.energy);
         player1.GetComponent<SpriteRenderer>().color = Color.blue;
 
+        cam = Camera.allCameras[0].GetComponent<CameraController>();
+        cam.target = player1.transform;
+
         DrawSiblings(player1.position);
         //continue;
-
 
         newPlayerinstanc = Instantiate(playerTypes[0], new Vector3(30, 30 + 0.2f, playerTypes[0].z), Quaternion.identity);
 
         newPlayerinstanc.energy_text = EnergyText;
         player2 = newPlayerinstanc;
         player2.SetEnergy(player2.energy);
-        player1.GetComponent<SpriteRenderer>().color = Color.red;
+        player2.GetComponent<SpriteRenderer>().color = Color.red;
+
+        //cam2 = Camera.allCameras[1].GetComponent<CameraController>();
+        //cam2.target = player2.transform;
 
         //DrawSiblings(player2.position);
         //continue;
@@ -243,7 +250,7 @@ public class CenarioCreator : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Camera.main == null)
+            if (Camera.allCamerasCount == 0)
                 return;
 
             var clickedGameObject = GetClickedGameObject();
@@ -363,13 +370,25 @@ public class CenarioCreator : MonoBehaviour
 
     GameObject GetClickedGameObject()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            return hit.transform.gameObject;
-        }
-
+        //blue turn
+        //if (turn % 2 == 1)
+        //{
+            Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                return hit.transform.gameObject;
+            }
+        //}
+        //else
+        //{
+        //    Ray ray = Camera.allCameras[0].ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        return hit.transform.gameObject;
+        //    }
+        //}
         return null;
     }
 
@@ -393,6 +412,11 @@ public class CenarioCreator : MonoBehaviour
                 }
 
                 DrawSiblings(player1.position);
+
+                cam.target = player1.transform;
+
+                //cam.GetComponent<Camera>().enabled = false;
+                //cam2.GetComponent<Camera>().enabled = true;
             }
         }
         //blue turn
@@ -413,6 +437,10 @@ public class CenarioCreator : MonoBehaviour
                 }
 
                 DrawSiblings(player2.position);
+
+                cam.target = player2.transform;
+                //cam2.GetComponent<Camera>().enabled = false;
+                //cam.GetComponent<Camera>().enabled = true;
             }
         }
     }
