@@ -18,6 +18,9 @@ public class CenarioCreator : MonoBehaviour
     public GameObject[] flag_black;
     public GameObject[] flag_white;
 
+    public GameObject[] rochaTiles;
+    public GameObject[] maca;
+
     public Char[] players;
 
     void Awake()
@@ -41,13 +44,13 @@ public class CenarioCreator : MonoBehaviour
     {
         _boardHolder = new GameObject("Board").transform;
         GameObject instance = null;
-
+        
         for (int x = 0; x < rows; x++)
         {
             for (int y = 0; y < columns; y++)
             {
 
-                GameObject toInstantiate = grassTiles[0];
+                GameObject toInstantiate = null;
                 int aux = 7;
 
                 int[] centroAgua1 = new int[] { 23, 8 };
@@ -68,23 +71,59 @@ public class CenarioCreator : MonoBehaviour
                 
 
                 int[] pos = new int[] { x, y };
-                               
+
 
                 if ((x + y < aux) || ((rows - x - 1) + (rows - y - 1) < aux))
                 {
                     toInstantiate = concretoTiles[0];
+
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
                 }
                 else if (InsideCircle(centroAgua1, raioAgua1, pos) || (InsideCircle(centroAgua2, raioAgua2, pos)))
                 {
                     toInstantiate = aguaTiles[0];
+
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
                 }
-                else if ((InsideCircle(centroArvore1, raioArvore1, pos) && !InsideCircle(centroArvore11, raioArvore11, pos)) || (InsideCircle(centroArvore2, raioArvore2, pos) && !InsideCircle(centroArvore22, raioArvore22, pos)))
+                else if ((InsideCircle(centroArvore1, raioArvore1, pos) && !InsideCircle(centroArvore11, raioArvore11, pos)))
                 {
                     toInstantiate = aguaTiles[0];
-                }
 
-                instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
-                instance.transform.SetParent(_boardHolder);
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
+
+                }
+                else if (InsideCircle(centroArvore2, raioArvore2, pos) && !InsideCircle(centroArvore22, raioArvore22, pos))
+                {
+                    toInstantiate = grassTiles[0];
+
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
+
+                    toInstantiate = rochaTiles[0];
+
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
+
+                }
+                else
+                {
+
+                    toInstantiate = grassTiles[0];
+
+                    instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(_boardHolder);
+
+                    float chance_maca = UnityEngine.Random.value;
+                    if (chance_maca < 0.01)
+                    {
+                        instance = Instantiate(maca[0], new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                        instance.transform.SetParent(_boardHolder);
+                    }
+                }
+                
             }
             
         }
