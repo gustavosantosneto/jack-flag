@@ -50,20 +50,18 @@ public class Char : MonoBehaviour
         this.width = c.width;
     }
 
-
-    public void setEnergy(int energyValue = 100)
+    public void SetEnergy(int energyValue = 100)
     {
         this.energy = energyValue;
         energy_text.text = energy.ToString();
     }
-
 
     public bool MoveTo(Vector3 destinePosition)
     {
         if (ValidateDestine(destinePosition) && energy > 0)
         {
             _RigidBody.MovePosition(destinePosition);
-            setEnergy(energy - 1);
+            SetEnergy(energy - 1);
             return true;
         }
         else
@@ -76,7 +74,7 @@ public class Char : MonoBehaviour
             return false;
 
         _RigidBody.MovePosition(destinePosition);
-        setEnergy(energy - 5);
+        SetEnergy(energy - 5);
         return true;
     }
 
@@ -86,7 +84,7 @@ public class Char : MonoBehaviour
             return false;
 
         Rigidbody.MovePosition(destinePosition);
-        setEnergy(energy - 5);
+        SetEnergy(energy - 5);
         return true;
     }
 

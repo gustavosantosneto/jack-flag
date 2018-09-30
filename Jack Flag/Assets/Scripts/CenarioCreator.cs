@@ -12,6 +12,7 @@ public class CenarioCreator : MonoBehaviour
     public int columns = 32;
     public int rows = 32;
     public static int tileScale = 1;
+    public int turn = 1;
 
     public GameObject[] concretoTiles;
     public GameObject[] aguaTiles;
@@ -30,14 +31,27 @@ public class CenarioCreator : MonoBehaviour
 
     public Char[] playerTypes;
     public Text EnergyText;
+    public Text TurnText;
 
-    Char selectedPlayer;
+    private Char player1;
+    private Vector3 player1LastMove;
+    private GameObject flagBlack;
+    private bool flagBlackClicked = false;
+    private GameObject flagWhite;
+    private bool flagWhiteClicked = false;
 
     void Awake()
     {
         MakeFloor();
         EnergyText = GameObject.Find("EnergyText").GetComponent<Text>();
+        TurnText = GameObject.Find("TurnText").GetComponent<Text>();
         CreatePlayers();
+    }
+
+    public void SetTurn(int turnValue = 100)
+    {
+        turn = turnValue;
+        TurnText.text = turn.ToString();
     }
 
     void CreatePlayers()
@@ -45,10 +59,10 @@ public class CenarioCreator : MonoBehaviour
         for (int i = 0, len = playerTypes.Length; i < len; i++)
         {
             var newPlayerinstanc = Instantiate(playerTypes[i], new Vector3((float)playerTypes[i].startX, (float)playerTypes[i].startY + 0.2f, playerTypes[i].z), Quaternion.identity);
-            if (selectedPlayer == null)
+            if (player1 == null)
             {
                 newPlayerinstanc.energy_text = EnergyText;
-                selectedPlayer = newPlayerinstanc;
+                player1 = newPlayerinstanc;
             }
         }
     }
@@ -158,10 +172,13 @@ public class CenarioCreator : MonoBehaviour
 
         instance = Instantiate(team1Base[0], new Vector3Int(2, 2, 0), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
-        instance = Instantiate(flag_black[0], new Vector3Int(2, 2, 0), Quaternion.identity) as GameObject;
-        instance.transform.SetParent(_boardHolder);
+
+        flagBlack = Instantiate(flag_black[0], new Vector3Int(2, 2, 0), Quaternion.identity) as GameObject;
+        flagBlack.transform.SetParent(_boardHolder);
+
         instance = Instantiate(team2Base[0], new Vector3Int(29, 29, 0), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
+
         instance = Instantiate(flag_white[0], new Vector3Int(29, 29, 0), Quaternion.identity) as GameObject;
         instance.transform.SetParent(_boardHolder);
     }
@@ -190,15 +207,30 @@ public class CenarioCreator : MonoBehaviour
             if (clickedGameObject == null)
                 return;
 
-            if (clickedGameObject.tag == "Floor")
+            //Flag click
+            if (clickedGameObject.transform.position.x == 2 && clickedGameObject.transform.position.y == 2)
+            {
+                flagBlackClicked = true;
+            }
+            else if (clickedGameObject.transform.position.x == 29 && clickedGameObject.transform.position.y == 29)
+            {
+                flagWhiteClicked = true;
+            }
+            else if (clickedGameObject.tag == "Floor")
             {
                 _GotoClickedTile(clickedGameObject);
+                SetTurn(turn + 1);
             }
             else if (clickedGameObject.tag == "Player")
             {
-                selectedPlayer = playerTypes.First(w => w.GetComponent<GameObject>() == clickedGameObject);
+                player1 = playerTypes.First(w => w.GetComponent<GameObject>() == clickedGameObject);
 
-                DrawSiblings(selectedPlayer.position);
+                DrawSiblings(player1.position);
+                SetTurn(turn + 1);
+            }
+            else if (clickedGameObject.tag == "Obstacle")
+            {
+                SetTurn(turn + 1);
             }
         }
     }
@@ -213,7 +245,7 @@ public class CenarioCreator : MonoBehaviour
             var floor = _boardHolder.GetChild(i);
 
             //IGNORE UNWALCABLE OBJECTS
-            if (floor.GetComponent<Collider>() == null)
+            if (floor.GetComponent<Collider>() == null || floor.tag != "Floor")
                 continue;
 
             var fPos = Vector3Int.RoundToInt(floor.transform.position);
@@ -271,15 +303,22 @@ public class CenarioCreator : MonoBehaviour
         return null;
     }
 
-
     void _GotoClickedTile(GameObject tile)
     {
-        var destinePosition = new Vector3(tile.transform.position.x, tile.transform.position.y, selectedPlayer.z);
+        var destinePosition = new Vector3(tile.transform.position.x, tile.transform.position.y, player1.z);
 
-        var moved = selectedPlayer.MoveTo(destinePosition);
+        player1LastMove = player1.position;
+
+        var moved = player1.MoveTo(destinePosition);
 
         if (moved)
         {
+            //Flag follow char, if clicked
+            if (flagBlackClicked)
+            {
+                flagBlack.GetComponent<Rigidbody>().MovePosition(player1LastMove);
+            }
+
             var floorPos = Vector3Int.RoundToInt(tile.transform.position);
 
             DrawSiblings(floorPos);
