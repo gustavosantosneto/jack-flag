@@ -14,13 +14,13 @@ public class CenarioCreator : MonoBehaviour
     public GameObject[] concretoTiles;
     public GameObject[] aguaTiles;
     public GameObject[] grassTiles;
+    public GameObject[] grass2Tiles;
     public GameObject[] moitaTiles;
     public GameObject[] quinaTile;
     public GameObject[] blocoxTile;
     public GameObject[] blocoyTile;
     public GameObject[] flag_black;
     public GameObject[] flag_white;
-
     public GameObject[] rochaTiles;
     public GameObject[] maca;
 
@@ -72,7 +72,7 @@ public class CenarioCreator : MonoBehaviour
             for (int y = 0; y < columns; y++)
             {   
                 int[] pos = new int[] { x, y };
-                
+
                 if ((x + y < aux) || ((rows - x - 1) + (rows - y - 1) < aux)) {
                     toInstantiate = concretoTiles[0];
 
@@ -89,7 +89,7 @@ public class CenarioCreator : MonoBehaviour
                 else if ((InsideCircle(centroArvore1, raioArvore1, pos) && !InsideCircle(centroArvore11, raioArvore11, pos)))
                 {
                     // instancia grass
-                    toInstantiate = grassTiles[0];
+                    toInstantiate = grass2Tiles[0];
                     instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
                     // instancia moita
                     toInstantiate = moitaTiles[0];
@@ -97,7 +97,7 @@ public class CenarioCreator : MonoBehaviour
                 }
                 else if (InsideCircle(centroArvore2, raioArvore2, pos) && !InsideCircle(centroArvore22, raioArvore22, pos))
                 {
-                    toInstantiate = grassTiles[0];
+                    toInstantiate = grass2Tiles[0];
 
                     instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
                     instance.transform.SetParent(_boardHolder);
